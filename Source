@@ -677,7 +677,7 @@ function Library:AddWindow(options)
 	end)
 
 	Window.Sidebar.Frame.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 and Mouse.Y - Window.Sidebar.Frame.AbsolutePosition.Y <= 25 then
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Mouse.Y - Window.Sidebar.Frame.AbsolutePosition.Y <= 25 then
 			toggleSidebar(not Window.Sidebar.Toggled)
 		end
 	end)
@@ -930,7 +930,7 @@ function Library:AddWindow(options)
 			end)
 
 			Section.Frame.InputBegan:Connect(function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1 and #Section.List > 0 and Window.Sidebar.Frame.AbsoluteSize.X <= 35 and Mouse.Y - Section.Frame.AbsolutePosition.Y <= 30 then
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and #Section.List > 0 and Window.Sidebar.Frame.AbsoluteSize.X <= 35 and Mouse.Y - Section.Frame.AbsolutePosition.Y <= 30 then
 					toggleSection(not Section.Toggled)
 				end
 			end)
@@ -1083,7 +1083,7 @@ function Library:AddWindow(options)
 				Toggle.Frame.Parent = Section.Frame.List
 
 				Toggle.Frame.Holder.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Toggle:Set(not Tab.Flags[Toggle.Flag], false)
 					end
 				end)
@@ -1247,7 +1247,7 @@ function Library:AddWindow(options)
 				ClipboardLabel.Frame.Parent = Section.Frame.List
 
 				ClipboardLabel.Frame.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						local s, result = pcall(ClipboardLabel.Callback)
 
 						if s then
@@ -1490,7 +1490,7 @@ function Library:AddWindow(options)
 				Bind.Frame.Parent = Section.Frame.List
 
 				Bind.Frame.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						if indicatorEntered == true then
 							Bind:Toggle(not Tab.Flags[Bind.Flag], false)
 						else
@@ -1685,7 +1685,7 @@ function Library:AddWindow(options)
 				Slider.Frame.Parent = Section.Frame.List
 
 				Slider.Frame.Holder.Slider.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 
 						connections.move = Mouse.Move:Connect(function()
 							local sliderPercent = math.clamp((Mouse.X - Slider.Frame.Holder.Slider.AbsolutePosition.X) / Slider.Frame.Holder.Slider.AbsoluteSize.X, 0, 1)
@@ -1702,7 +1702,7 @@ function Library:AddWindow(options)
 				end)
 
 				Slider.Frame.Holder.Slider.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						connections.move:Disconnect()
 						connections.move = nil
 
@@ -1748,7 +1748,7 @@ function Library:AddWindow(options)
 					indicator.Parent = Slider.Frame.Holder
 
 					Slider.Frame.Holder.Indicator.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							Slider:Toggle(not Tab.Flags[Slider.Flag], false)
 						end
 					end)
@@ -1987,7 +1987,7 @@ function Library:AddWindow(options)
 				end)
 				
 				Dropdown.Frame.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and #Dropdown.List > 0 and Mouse.Y - Dropdown.Frame.AbsolutePosition.Y <= 30 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and #Dropdown.List > 0 and Mouse.Y - Dropdown.Frame.AbsolutePosition.Y <= 30 then
 						Dropdown:Toggle(not Dropdown.Toggled)
 					end
 				end)
@@ -2356,31 +2356,31 @@ function Library:AddWindow(options)
 				Picker.Frame.Parent = Section.Frame.List
 
 				Picker.Frame.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and Mouse.Y - Picker.Frame.AbsolutePosition.Y <= 30 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Mouse.Y - Picker.Frame.AbsolutePosition.Y <= 30 then
 						Picker:Toggle(not Picker.Toggled)
 					end
 				end)
 
 				Picker.Frame.Holder.Holder.HueSlider.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						hueDragging = true
 					end
 				end)
 
 				Picker.Frame.Holder.Holder.HueSlider.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						hueDragging = false
 					end
 				end)
 
 				Picker.Frame.Holder.Holder.Palette.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						satDragging = true
 					end
 				end)
 
 				Picker.Frame.Holder.Holder.Palette.InputEnded:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						satDragging = false
 					end
 				end)
@@ -2428,7 +2428,7 @@ function Library:AddWindow(options)
 				end)
 
 				Picker.Frame.Holder.Holder.Rainbow.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 						Picker:ToggleRainbow(not Picker.Rainbow)
 					end
 				end)
@@ -2698,7 +2698,7 @@ function Library:AddWindow(options)
 					Toggle.Frame.Parent = SubSection.Frame.Holder.List
 
 					Toggle.Frame.Holder.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							Toggle:Set(not Tab.Flags[Toggle.Flag], false)
 						end
 					end)
@@ -2862,7 +2862,7 @@ function Library:AddWindow(options)
 					ClipboardLabel.Frame.Parent = SubSection.Frame.Holder.List
 
 					ClipboardLabel.Frame.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							local s, result = pcall(ClipboardLabel.Callback)
 
 							if s then
@@ -3105,7 +3105,7 @@ function Library:AddWindow(options)
 					Bind.Frame.Parent = SubSection.Frame.Holder.List
 
 					Bind.Frame.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							if indicatorEntered == true then
 								Bind:Toggle(not Tab.Flags[Bind.Flag], false)
 							else
@@ -3300,7 +3300,7 @@ function Library:AddWindow(options)
 					Slider.Frame.Parent = SubSection.Frame.Holder.List
 
 					Slider.Frame.Holder.Slider.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 
 							connections.move = Mouse.Move:Connect(function()
 								local sliderPercent = math.clamp((Mouse.X - Slider.Frame.Holder.Slider.AbsolutePosition.X) / Slider.Frame.Holder.Slider.AbsoluteSize.X, 0, 1)
@@ -3317,7 +3317,7 @@ function Library:AddWindow(options)
 					end)
 
 					Slider.Frame.Holder.Slider.InputEnded:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							connections.move:Disconnect()
 							connections.move = nil
 
@@ -3363,7 +3363,7 @@ function Library:AddWindow(options)
 						indicator.Parent = Slider.Frame.Holder
 
 						Slider.Frame.Holder.Indicator.InputBegan:Connect(function(input)
-							if input.UserInputType == Enum.UserInputType.MouseButton1 then
+							if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 								Slider:Toggle(not Tab.Flags[Slider.Flag], false)
 							end
 						end)
@@ -3603,7 +3603,7 @@ function Library:AddWindow(options)
 					end)
 					
 					Dropdown.Frame.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 and #Dropdown.List > 0 and Mouse.Y - Dropdown.Frame.AbsolutePosition.Y <= 30 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and #Dropdown.List > 0 and Mouse.Y - Dropdown.Frame.AbsolutePosition.Y <= 30 then
 							Dropdown:Toggle(not Dropdown.Toggled)
 						end
 					end)
@@ -3974,31 +3974,31 @@ function Library:AddWindow(options)
 					Picker.Frame.Parent = SubSection.Frame.Holder.List
 
 					Picker.Frame.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 and Mouse.Y - Picker.Frame.AbsolutePosition.Y <= 30 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and Mouse.Y - Picker.Frame.AbsolutePosition.Y <= 30 then
 							Picker:Toggle(not Picker.Toggled)
 						end
 					end)
 
 					Picker.Frame.Holder.Holder.HueSlider.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							hueDragging = true
 						end
 					end)
 
 					Picker.Frame.Holder.Holder.HueSlider.InputEnded:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							hueDragging = false
 						end
 					end)
 
 					Picker.Frame.Holder.Holder.Palette.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							satDragging = true
 						end
 					end)
 
 					Picker.Frame.Holder.Holder.Palette.InputEnded:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							satDragging = false
 						end
 					end)
@@ -4046,7 +4046,7 @@ function Library:AddWindow(options)
 					end)
 
 					Picker.Frame.Holder.Holder.Rainbow.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							Picker:ToggleRainbow(not Picker.Rainbow)
 						end
 					end)
@@ -4065,7 +4065,7 @@ function Library:AddWindow(options)
 				end)
 
 				SubSection.Frame.Holder.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and #SubSection.List > 0 and Window.Sidebar.Frame.AbsoluteSize.X <= 35 and Mouse.Y - SubSection.Frame.AbsolutePosition.Y <= 30 then
+					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and #SubSection.List > 0 and Window.Sidebar.Frame.AbsoluteSize.X <= 35 and Mouse.Y - SubSection.Frame.AbsolutePosition.Y <= 30 then
 						toggleSubSection(not SubSection.Toggled)
 					end
 				end)
