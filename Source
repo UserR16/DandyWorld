@@ -22,41 +22,7 @@ local Library = {
 }
 
 -- Services
-local function Dragging(name)
-local dragging = false
-local dragInput, dragStart, startPos
- 
-local function update(input)
-    local delta = input.Position - dragStart
-    [name]Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
- 
-[name]InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        dragStart = input.Position
-        startPos = [name]Position
- 
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
- 
-[name]InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
-end)
- 
-game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if dragging and input == dragInput then
-        update(input)
-    end
-end)
-end
+
 local Players = game:GetService("Players")
 local UIS = game:GetService("UserInputService")
 local RS = game:GetService("RunService")
@@ -484,7 +450,6 @@ function Library:AddWindow(options)
 			}),
 		}, UDim.new(0, 5))
 	})
-Dragging(Window.Frame)
 	-- Functions
 
 	local function saveConfig(filePath)
