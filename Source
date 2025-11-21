@@ -45,6 +45,8 @@ local Storage = { Connections = {}, Tween = { Cosmetic = {} } }
 
 local ListenForInput = false
 
+_G.MoveUI = true
+
 -- Directory
 
 local Directory = SelfModules.Directory.Create({
@@ -585,7 +587,7 @@ Window.Frame.InputBegan:Connect(function(input)
 end)
  
 Window.Frame.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+    if _G.MoveUI and input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
         dragInput = input
     end
 end)
@@ -4203,7 +4205,155 @@ end
 local IsMobile = (UIS:GetPlatform() == Enum.Platform.Android or UIS:GetPlatform() == Enum.Platform.IOS)
 
 if IsMobile then
-print("Device : Mobile")
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "UI_TOGGLE"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = CG
+
+local Button = Instance.new("TextButton")
+Button.Size = UDim2.new(0.075, 0, 0.065, 0)
+Button.Position = UDim2.new(0, 0, 0, 10)
+Button.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Button.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button.Font = Enum.Font.Code
+Button.TextSize = 14
+Button.Text = "Toggle"
+Button.Parent = ScreenGui
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(1, 0, 1, 0)
+Frame.Position = UDim2.new(0, 0, 0, 0)
+Frame.BackgroundTransparency = 1
+Frame.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Frame.Parent = Button
+
+local Button2 = Instance.new("TextButton")
+Button2.Size = UDim2.new(0.075, 0, 0.065, 0)
+Button2.Position = UDim2.new(0, 0, 0, 51)
+Button2.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Button2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Button2.Font = Enum.Font.Code
+Button2.TextSize = 14
+Button2.Text = "Lock"
+Button2.Parent = ScreenGui
+
+local Frame2 = Instance.new("Frame")
+Frame2.Size = UDim2.new(1, 0, 1, 0)
+Frame2.Position = UDim2.new(0, 0, 0, 0)
+Frame2.BackgroundTransparency = 1
+Frame2.BackgroundColor3 = Color3.fromRGB(15,15,15)
+Frame2.Parent = Button2
+
+local dragging = false
+local dragInput, dragStart, startPos
+ 
+local function update(input)
+    local delta = input.Position - dragStart
+    Button.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+ 
+Button.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = Button.Position
+ 
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+ 
+Button.InputChanged:Connect(function(input)
+    if _G.MoveUI and input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+ 
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and input == dragInput then
+        update(input)
+    end
+end)
+local dragging = false
+local dragInput, dragStart, startPos
+ 
+local function update(input)
+    local delta = input.Position - dragStart
+    Button2.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+ 
+Button2.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = Button2.Position
+ 
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+ 
+Button2.InputChanged:Connect(function(input)
+    if _G.MoveUI and input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+ 
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and input == dragInput then
+        update(input)
+    end
+end)
+
+local UICornerButton = Instance.new("UICorner")
+UICornerButton.Parent = Button
+
+local UICornerFrame = Instance.new("UICorner")
+UICornerFrame.Parent = Frame
+
+local UIStrokeFrame = Instance.new("UIStroke", Frame)
+UIStrokeFrame.Color = Color3.fromRGB(40,40,40)
+
+local UICornerButton2 = Instance.new("UICorner")
+UICornerButton2.Parent = Button2
+
+local UICornerFrame2 = Instance.new("UICorner")
+UICornerFrame2.Parent = Frame2
+
+local UIStrokeFrame2 = Instance.new("UIStroke", Frame2)
+UIStrokeFrame2.Color = Color3.fromRGB(40,40,40)
+
+local Default = false
+
+Button.MouseButton1Click:Connect(function()
+Default = not Default
+if Default then
+Button.Text = "Toggle"
+ScreenGui.Enabled = false
+else
+Button.Text = "Toggle"
+ScreenGui.Enabled = true
+end
+end)
+
+local Default2 = false
+
+Button2.MouseButton1Click:Connect(function()
+Default2 = not Default2
+if Default2 then
+Button2.Text = "Unlock"
+_G.MoveUI = false
+else
+Button2.Text = "Lock"
+_G.MoveUI = true
+end
+end)
 else
 print("PC")
 end
