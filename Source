@@ -573,7 +573,7 @@ local function update(input)
 end
  
 Window.Frame.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+    if _G.MoveUI and input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = Window.Frame.Position
@@ -593,7 +593,7 @@ Window.Frame.InputChanged:Connect(function(input)
 end)
  
 game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if dragging and input == dragInput then
+    if _G.MoveUI and dragging and input == dragInput then
         update(input)
     end
 end)
@@ -4205,7 +4205,7 @@ end
 local IsMobile = (UIS:GetPlatform() == Enum.Platform.Android or UIS:GetPlatform() == Enum.Platform.IOS)
 
 if IsMobile then
-local ScreenGui = Instance.new("ScreenGui")
+local ScreenGui2 = Instance.new("ScreenGui")
 ScreenGui.Name = "UI_TOGGLE"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.Parent = CG
@@ -4218,7 +4218,7 @@ Button.TextColor3 = Color3.fromRGB(255, 255, 255)
 Button.Font = Enum.Font.Code
 Button.TextSize = 14
 Button.Text = "Toggle"
-Button.Parent = ScreenGui
+Button.Parent = ScreenGui2
 
 local Frame = Instance.new("Frame")
 Frame.Size = UDim2.new(1, 0, 1, 0)
@@ -4235,7 +4235,7 @@ Button2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Button2.Font = Enum.Font.Code
 Button2.TextSize = 14
 Button2.Text = "Lock"
-Button2.Parent = ScreenGui
+Button2.Parent = ScreenGui2
 
 local Frame2 = Instance.new("Frame")
 Frame2.Size = UDim2.new(1, 0, 1, 0)
@@ -4253,7 +4253,7 @@ local function update(input)
 end
  
 Button.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+    if _G.MoveUI and input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = Button.Position
@@ -4273,7 +4273,7 @@ Button.InputChanged:Connect(function(input)
 end)
  
 game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if dragging and input == dragInput then
+    if _G.MoveUI and dragging and input == dragInput then
         update(input)
     end
 end)
@@ -4286,7 +4286,7 @@ local function update(input)
 end
  
 Button2.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+    if _G.MoveUI and input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = Button2.Position
@@ -4306,7 +4306,7 @@ Button2.InputChanged:Connect(function(input)
 end)
  
 game:GetService("UserInputService").InputChanged:Connect(function(input)
-    if dragging and input == dragInput then
+    if _G.MoveUI and dragging and input == dragInput then
         update(input)
     end
 end)
