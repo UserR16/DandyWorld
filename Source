@@ -4206,9 +4206,9 @@ local IsMobile = (UIS:GetPlatform() == Enum.Platform.Android or UIS:GetPlatform(
 
 if IsMobile then
 local ScreenGui2 = Instance.new("ScreenGui")
-ScreenGui.Name = "UI_TOGGLE"
-ScreenGui.ResetOnSpawn = false
-ScreenGui.Parent = CG
+ScreenGui2.Name = "UI_TOGGLE"
+ScreenGui2.ResetOnSpawn = false
+ScreenGui2.Parent = CG
 
 local Button = Instance.new("TextButton")
 Button.Size = UDim2.new(0.075, 0, 0.065, 0)
