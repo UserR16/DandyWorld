@@ -1,6 +1,7 @@
 -- Library
 
 local Library = {
+    DevicePlatform = nil,
 	Theme = {
 		Accent = Color3.fromRGB(0, 255, 0),
 		TopbarColor = Color3.fromRGB(20, 20, 20),
@@ -4166,6 +4167,13 @@ function Library:AddWindow(options)
 	return Window
 end
 
+local IsMobile = (Library.DevicePlatform == Enum.Platform.Android or Library.DevicePlatform == Enum.Platform.IOS)
+
+if IsMobile then
+print("Device : Mobile")
+else
+print("PC")
+end
 ScreenGui.Parent = CG
 
 return Library
