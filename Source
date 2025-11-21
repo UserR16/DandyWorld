@@ -4167,7 +4167,7 @@ function Library:AddWindow(options)
 	return Window
 end
 
-local IsMobile = (UserInputService:GetPlatform() == Enum.Platform.Android or UserInputService:GetPlatform() == Enum.Platform.IOS)
+local IsMobile = (UIS:GetPlatform() == Enum.Platform.Android or UIS:GetPlatform() == Enum.Platform.IOS)
 
 if IsMobile then
 print("Device : Mobile")
