@@ -4167,13 +4167,14 @@ function Library:AddWindow(options)
 	return Window
 end
 
-local IsMobile = (Library.DevicePlatform == Enum.Platform.Android or Library.DevicePlatform == Enum.Platform.IOS)
+local IsMobile = (UserInputService:GetPlatform() == Enum.Platform.Android or UserInputService:GetPlatform() == Enum.Platform.IOS)
 
 if IsMobile then
 print("Device : Mobile")
 else
 print("PC")
 end
+
 ScreenGui.Parent = CG
 
 return Library
