@@ -2784,7 +2784,7 @@ local function getDragIt()
             self._InputCheck =
                 setTo.InputBegan:Connect(
                 function(Input)
-                    if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                         local CanSet = false
                         for _, v in ipairs(Objects) do
                             if v.CanDrag then
@@ -2836,7 +2836,7 @@ local function getDragIt()
                 if gp then
                     return
                 end
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                     for _, v in ipairs(Objects) do
                         if v.CanDrag then
                             v.OldPosition = Vector2.new(Mouse.X, Mouse.Y)
@@ -2954,7 +2954,7 @@ local function getDragIt()
         drag.InputEnd =
             UIS.InputEnded:Connect(
             function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                     if RenderConnection then
                         RenderConnection:Disconnect()
                         RenderConnection = nil
@@ -3044,7 +3044,7 @@ local function getEffect()
             conns,
             ui.InputBegan:Connect(
                 function(input, gp)
-                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseMovement then
+                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                         return
                     end
 
@@ -3066,7 +3066,7 @@ local function getEffect()
             conns,
             ui.InputEnded:Connect(
                 function(input, gp)
-                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseMovement then
+                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                         return
                     end
 
@@ -3124,7 +3124,7 @@ local function getEffect()
             conns,
             ui.InputBegan:Connect(
                 function(input, gp)
-                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseButton1 then
+                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         return
                     end
 
@@ -3143,7 +3143,7 @@ local function getEffect()
             conns,
             ui.InputEnded:Connect(
                 function(input, gp)
-                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseButton1 then
+                    if gp == true or input.UserInputType ~= Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         return
                     end
 
@@ -3420,7 +3420,7 @@ function UILibrary.Window:Notification(sett)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         Notif.Content.Buttons.Close,
                         TI,
@@ -3443,7 +3443,7 @@ function UILibrary.Window:Notification(sett)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         Notif.Content.Buttons.Close,
                         TI,
@@ -3602,7 +3602,7 @@ function UILibrary.Window:Prompt(sett)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         Close.Button,
                         TI,
@@ -3610,7 +3610,7 @@ function UILibrary.Window:Prompt(sett)
                             ImageColor3 = Color3.fromRGB(100, 100, 100)
                         }
                     ):Play()
-                elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+                elseif input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                     expire()
                 end
             end
@@ -3625,7 +3625,7 @@ function UILibrary.Window:Prompt(sett)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         Close.Button,
                         TI,
@@ -3646,7 +3646,7 @@ function UILibrary.Window:Prompt(sett)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         Accept.Button,
                         TI,
@@ -3654,7 +3654,7 @@ function UILibrary.Window:Prompt(sett)
                             ImageColor3 = Color3.fromRGB(100, 100, 100)
                         }
                     ):Play()
-                elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+                elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                     selection = true
                     expire()
                 end
@@ -3670,7 +3670,7 @@ function UILibrary.Window:Prompt(sett)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         Accept.Button,
                         TI,
@@ -4129,9 +4129,9 @@ local function setupEffects(ui, hover)
                 return
             end
 
-            if input.UserInputType == Enum.UserInputType.MouseMovement then
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                 TweenService:Create(hover, TI, constructTweenInfo(.5)):Play()
-            elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+            elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 TweenService:Create(hover, TI, constructTweenInfo(.2)):Play()
             end
         end
@@ -4143,9 +4143,9 @@ local function setupEffects(ui, hover)
                 return
             end
 
-            if input.UserInputType == Enum.UserInputType.MouseMovement then
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                 TweenService:Create(hover, TI, constructTweenInfo(1)):Play()
-            elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+            elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 TweenService:Create(hover, TI, constructTweenInfo(.5)):Play()
 
                 ClickEvent:Fire()
@@ -4527,7 +4527,8 @@ function UILibrary.Section:Keybind(sett, callback)
                         conn:Disconnect()
                     elseif
                         input.UserInputType == Enum.UserInputType.MouseButton2 or
-                            input.UserInputType == Enum.UserInputType.MouseButton1
+                            input.UserInputType == Enum.UserInputType.MouseButton1 or 
+                            input.UserInputType == Enum.UserInputType.Touch
                         then
                         currentKb = input.UserInputType
 
@@ -4709,7 +4710,7 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         holdingHsv = true
                     end
                 end
@@ -4724,7 +4725,7 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         holdingHsv = false
                     end
                 end
@@ -4739,7 +4740,7 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         holdingSaturation = true
                     end
                 end
@@ -4754,7 +4755,7 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         holdingSaturation = false
                     end
                 end
@@ -4853,9 +4854,9 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         closeMenu()
-                    elseif input.UserInputType == Enum.UserInputType.MouseMovement then
+                    elseif input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                         TweenService:Create(
                             Content.Buttons.Cancel.OtherFill,
                             TI,
@@ -4876,7 +4877,7 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseMovement then
+                    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                         TweenService:Create(
                             Content.Buttons.Cancel.OtherFill,
                             TI,
@@ -4897,13 +4898,13 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                         local actual, clr = updateWheel()
 
                         functions.setValue(actual)
 
                         closeMenu()
-                    elseif input.UserInputType == Enum.UserInputType.MouseMovement then
+                    elseif input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                         TweenService:Create(
                             Content.Buttons.Confirm.OtherFill,
                             TI,
@@ -4924,7 +4925,7 @@ function UILibrary.Section:ColorPicker(sett, callback)
                         return
                     end
 
-                    if input.UserInputType == Enum.UserInputType.MouseMovement then
+                    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                         TweenService:Create(
                             Content.Buttons.Confirm.OtherFill,
                             TI,
@@ -5120,7 +5121,7 @@ function UILibrary.Section:Slider(sett, callback)
                 return
             end
 
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 holding = true
             end
         end
@@ -5132,7 +5133,7 @@ function UILibrary.Section:Slider(sett, callback)
                 return
             end
 
-            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                 holding = false
             end
         end
@@ -5301,9 +5302,9 @@ function UILibrary.Section:Dropdown(sett, callback)
                             return
                         end
 
-                        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                             functions.setValue(v, not options[v])
-                        elseif input.UserInputType == Enum.UserInputType.MouseMovement then
+                        elseif input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                             TweenService:Create(
                                 Option,
                                 TI,
@@ -5320,7 +5321,7 @@ function UILibrary.Section:Dropdown(sett, callback)
                 optionConnections,
                 Option.InputEnded:Connect(
                     function(input, gp)
-                        if input.UserInputType == Enum.UserInputType.MouseMovement then
+                        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                             TweenService:Create(
                                 Option,
                                 TI,
@@ -5460,7 +5461,7 @@ function UILibrary.Section:Dropdown(sett, callback)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         element.MainHolder.Content.Icon.Holder.Icon,
                         TI,
@@ -5469,7 +5470,7 @@ function UILibrary.Section:Dropdown(sett, callback)
                             ImageColor3 = Color3.fromRGB(50, 50, 50)
                         }
                     ):Play()
-                elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+                elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
                     functions.openMenu()
                 end
             end
@@ -5484,7 +5485,7 @@ function UILibrary.Section:Dropdown(sett, callback)
                     return
                 end
 
-                if input.UserInputType == Enum.UserInputType.MouseMovement then
+                if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                     TweenService:Create(
                         element.MainHolder.Content.Icon.Holder.Icon,
                         TI,
@@ -5517,5 +5518,6 @@ function UILibrary.Section:Dropdown(sett, callback)
 
     return meta
 end
+
 
 return UILibrary
