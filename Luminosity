@@ -159,7 +159,7 @@ function Utility.CreateDrag(Frame, Parent, Settings)
     function DragPro:Initialize()
         table.insert(Connections,
             Frame.InputBegan:Connect(function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                     DragPro.Dragging = true
                     DragInfo.MousePosition = Input.Position
                     DragInfo.FramePosition = DragInfo.Parent.Position
@@ -765,7 +765,7 @@ local function CreateOptions(Frame)
         end
 
         Services.UserInputService.InputChanged:Connect(function(Input)
-            if Info.Sliding == true and Input.UserInputType == Enum.UserInputType.MouseMovement then
+            if Info.Sliding == true and Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
                 UpdateSlider(((Input.Position.X - Container.Bar.AbsolutePosition.X) / Container.Bar.AbsoluteSize.X) * Properties.Settings.Max)
                 Info.LastSelected = time()
                 local Success, Error = pcall(Properties.Function, Properties.Value)
@@ -1113,7 +1113,7 @@ function Luminosity.new(Name, Header, Icon)
         end)
 
         TabButton.InputBegan:Connect(function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                 UIPageLayout:JumpTo(TabFrame)
                 Utility.Wait()
                 DragPro.Dragging = false
@@ -1465,7 +1465,7 @@ function Luminosity.new(Name, Header, Icon)
             }
 
             Base.InputBegan:Connect(function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                     for i,v in ipairs(FolderTweens[Info.Collapsed]) do
                         if typeof(v) == "function" then
                             coroutine.wrap(v)()
@@ -1544,5 +1544,6 @@ function Luminosity.new(Name, Header, Icon)
         rawset(Self, Index, Value)
     end})
 end
+
 
 return Luminosity
