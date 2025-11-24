@@ -791,7 +791,7 @@ local function CreateOptions(Frame)
             assert(Luminosity.Settings.Debug == false or Success, Error)
         end)
         Container.InputEnded:Connect(function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+            if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                 Info.Sliding = false
                 Info.LastSelected = time()
                 
@@ -1271,7 +1271,7 @@ function Luminosity.new(Name, Header, Icon)
             }
 
             Base.InputBegan:Connect(function(Input)
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
                     for i,v in ipairs(Tweens[Info.Collapsed]) do
                         if typeof(v) == "function" then
                             coroutine.wrap(v)()
@@ -1547,3 +1547,4 @@ end
 
 
 return Luminosity
+
