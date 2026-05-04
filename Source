@@ -2303,7 +2303,7 @@ end)
 									Font = Enum.Font.SourceSans,
 									Text = "Rainbow",
 									TextColor3 = Library.Theme.TextColor,
-									TextSize = 14,
+									TextSize = 12,
 									TextWrapped = true,
 									TextXAlignment = Enum.TextXAlignment.Left,
 								}),
@@ -2373,7 +2373,6 @@ end)
 					local color = Color3.fromHSV(h, s, v)
 					Picker.Frame.Holder.Holder.Palette.Hue.UIGradient.Color = ColorSequence.new(Color3.new(1, 1, 1), Color3.fromHSV(h, 1, 1))
 					Picker.Frame.Holder.Top.Selected.Preview.BackgroundColor3 = color
-					Picker.Frame.Holder.Top.Selected.Display.Text = string.format("%d, %d, %d", math.floor(color.R * 255 + 0.5), math.floor(color.G * 255 + 0.5), math.floor(color.B * 255 + 0.5))
 					Picker.Frame.Holder.Top.Selected.Size = UDim2.new(0, math.round(TXS:GetTextSize(Picker.Frame.Holder.Top.Selected.Display.Text, 16, Enum.Font.SourceSans, Vector2.new(9e9)).X + 0.5) + 20, 0, 26)
 
 					Picker.Frame.Holder.Holder.RGB.Red.Box.Text = math.floor(color.R * 255 + 0.5)
@@ -3991,7 +3990,6 @@ end)
 						local color = Color3.fromHSV(h, s, v)
 						Picker.Frame.Holder.Holder.Palette.Hue.UIGradient.Color = ColorSequence.new(Color3.new(1, 1, 1), Color3.fromHSV(h, 1, 1))
 						Picker.Frame.Holder.Top.Selected.Preview.BackgroundColor3 = color
-						Picker.Frame.Holder.Top.Selected.Display.Text = string.format("%d, %d, %d", math.floor(color.R * 255 + 0.5), math.floor(color.G * 255 + 0.5), math.floor(color.B * 255 + 0.5))
 						Picker.Frame.Holder.Top.Selected.Size = UDim2.new(0, math.round(TXS:GetTextSize(Picker.Frame.Holder.Top.Selected.Display.Text, 16, Enum.Font.SourceSans, Vector2.new(9e9)).X + 0.5) + 20, 0, 26)
 
 						Picker.Frame.Holder.Holder.RGB.Red.Box.Text = math.floor(color.R * 255 + 0.5)
