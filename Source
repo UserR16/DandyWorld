@@ -4185,7 +4185,7 @@ end)
 				loadConfig(Library.Settings.ConfigPath.. "/".. LoadName.Selected)
 			end)
 
-            LoadSection:AddToggle("Auto Load Config", {toggleable = true, default = false, flag = "autoloadtoggle"}, function(v)
+            LoadSection:AddToggle("Auto Load Config", {toggleable = true, default = false, flag = "autoloadtoggle", fireontoggle = true, fireondrag = true, rounded = true}, function(v)
             autoloadconfig = v
             while autoloadconfig do
                   loadConfig(Library.Settings.ConfigPath.. "/".. LoadName.Selected)
